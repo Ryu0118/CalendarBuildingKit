@@ -1,5 +1,5 @@
 import SwiftUI
-import CalendarBuilderKit
+import CalendarBuildingKit
 
 struct MonthCalendarsView: View {
     @State var selectedDate: Date = Date()

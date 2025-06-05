@@ -1,5 +1,5 @@
 import SwiftUI
-import CalendarBuilderKit
+import CalendarBuildingKit
 
 struct ContentView: View {
     var body: some View {

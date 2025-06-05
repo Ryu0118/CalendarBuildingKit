@@ -1,5 +1,5 @@
 import SwiftUI
-import CalendarBuilderKit
+import CalendarBuildingKit
 
 func createCustomCalendar(
     firstWeekday: Int,

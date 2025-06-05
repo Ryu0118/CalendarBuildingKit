@@ -1,18 +1,18 @@
-# CalendarBuilderKit
+# CalendarBuildingKit
 
 **A minimal framework for building calendar views in SwiftUI**
 
-CalendarBuilderKit provides essential logic for constructing calendar views. It generates structured calendar data (months, weeks, days), allowing you to focus on designing your calendar UI.
+CalendarBuildingKit provides essential logic for constructing calendar views. It generates structured calendar data (months, weeks, days), allowing you to focus on designing your calendar UI.
 
 ## 🚀 Quick Start
 
 ### Installation
 
-Add CalendarBuilderKit to your project using Swift Package Manager:
+Add CalendarBuildingKit to your project using Swift Package Manager:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/CalendarBuilderKit", from: "0.1.0")
+    .package(url: "https://github.com/yourusername/CalendarBuildingKit", from: "0.1.0")
 ]
 ```
 

@@ -1,5 +1,5 @@
 import SwiftUI
-import CalendarBuilderKit
+import CalendarBuildingKit
 
 struct WeekCalendarsView: View {
     @State var selectedDate: Date = Date()

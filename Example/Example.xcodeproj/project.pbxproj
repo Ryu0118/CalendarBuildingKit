@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		427690732DF1DFCD00A6BDB4 /* CalendarBuilderKit in Frameworks */ = {isa = PBXBuildFile; productRef = 427690722DF1DFCD00A6BDB4 /* CalendarBuilderKit */; };
+		427690732DF1DFCD00A6BDB4 /* CalendarBuildingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 427690722DF1DFCD00A6BDB4 /* CalendarBuildingKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				427690732DF1DFCD00A6BDB4 /* CalendarBuilderKit in Frameworks */,
+				427690732DF1DFCD00A6BDB4 /* CalendarBuildingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +70,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				427690722DF1DFCD00A6BDB4 /* CalendarBuilderKit */,
+				427690722DF1DFCD00A6BDB4 /* CalendarBuildingKit */,
 			);
 			productName = Example;
 			productReference = 4276905F2DF1DFBA00A6BDB4 /* Example.app */;
@@ -101,7 +101,7 @@
 			mainGroup = 427690562DF1DFBA00A6BDB4;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				427690712DF1DFCD00A6BDB4 /* XCLocalSwiftPackageReference "../../CalendarBuilderKit" */,
+				427690712DF1DFCD00A6BDB4 /* XCLocalSwiftPackageReference "../../CalendarBuildingKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 427690602DF1DFBA00A6BDB4 /* Products */;
@@ -352,16 +352,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		427690712DF1DFCD00A6BDB4 /* XCLocalSwiftPackageReference "../../CalendarBuilderKit" */ = {
+		427690712DF1DFCD00A6BDB4 /* XCLocalSwiftPackageReference "../../CalendarBuildingKit" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../CalendarBuilderKit;
+			relativePath = ../../CalendarBuildingKit;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		427690722DF1DFCD00A6BDB4 /* CalendarBuilderKit */ = {
+		427690722DF1DFCD00A6BDB4 /* CalendarBuildingKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = CalendarBuilderKit;
+			productName = CalendarBuildingKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

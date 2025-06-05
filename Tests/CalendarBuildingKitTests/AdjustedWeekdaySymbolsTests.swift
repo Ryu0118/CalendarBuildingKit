@@ -1,6 +1,6 @@
 import Testing
 import Foundation
-@testable import CalendarBuilderKit
+@testable import CalendarBuildingKit
 
 @Suite
 struct AdjustedWeekdaySymbolsTests {

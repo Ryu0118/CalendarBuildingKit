@@ -4,26 +4,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "CalendarBuilderKit",
+    name: "CalendarBuildingKit",
     platforms: [
         .iOS(.v17), .macOS(.v14), .visionOS(.v1), .watchOS(.v10), .macCatalyst(.v17), .tvOS(.v17)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "CalendarBuilderKit",
-            targets: ["CalendarBuilderKit"]
+            name: "CalendarBuildingKit",
+            targets: ["CalendarBuildingKit"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "CalendarBuilderKit"
+            name: "CalendarBuildingKit"
         ),
         .testTarget(
-            name: "CalendarBuilderKitTests",
-            dependencies: ["CalendarBuilderKit"]
+            name: "CalendarBuildingKitTests",
+            dependencies: ["CalendarBuildingKit"]
         ),
     ]
 )
