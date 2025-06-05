@@ -8,38 +8,16 @@ public enum WeekdaySymbolType {
     case short
     /// Very short weekday symbols (e.g., "S", "M", ...)
     case veryShort
-}
 
-/// A structure containing all variations of weekday symbols adjusted for firstWeekday
-public struct AdjustedWeekdaySymbols {
-    /// Standalone weekday symbols adjusted for firstWeekday
-    public let standaloneWeekdaySymbols: [String]
-
-    /// Short standalone weekday symbols adjusted for firstWeekday
-    public let shortStandaloneWeekdaySymbols: [String]
-
-    /// Very short standalone weekday symbols adjusted for firstWeekday
-    public let veryShortStandaloneWeekdaySymbols: [String]
-
-    init(calendar: Calendar) {
+    func getSymbols(from calendar: Calendar) -> [String] {
         let offset = calendar.firstWeekday - 1
-
-        self.standaloneWeekdaySymbols = Array(calendar.standaloneWeekdaySymbols[offset...] + calendar.standaloneWeekdaySymbols[..<offset])
-        self.shortStandaloneWeekdaySymbols = Array(calendar.shortStandaloneWeekdaySymbols[offset...] + calendar.shortStandaloneWeekdaySymbols[..<offset])
-        self.veryShortStandaloneWeekdaySymbols = Array(calendar.veryShortStandaloneWeekdaySymbols[offset...] + calendar.veryShortStandaloneWeekdaySymbols[..<offset])
-    }
-
-    /// Returns the weekday symbols array for the specified symbol type
-    /// - Parameter type: The type of weekday symbols to return
-    /// - Returns: Array of weekday symbols adjusted for firstWeekday
-    public func getSymbols(for type: WeekdaySymbolType) -> [String] {
-        switch type {
+        return switch self {
         case .full:
-            return standaloneWeekdaySymbols
+            Array(calendar.standaloneWeekdaySymbols[offset...] + calendar.standaloneWeekdaySymbols[..<offset])
         case .short:
-            return shortStandaloneWeekdaySymbols
+            Array(calendar.shortStandaloneWeekdaySymbols[offset...] + calendar.shortStandaloneWeekdaySymbols[..<offset])
         case .veryShort:
-            return veryShortStandaloneWeekdaySymbols
+            Array(calendar.veryShortStandaloneWeekdaySymbols[offset...] + calendar.veryShortStandaloneWeekdaySymbols[..<offset])
         }
     }
 }

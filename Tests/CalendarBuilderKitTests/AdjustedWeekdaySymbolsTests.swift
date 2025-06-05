@@ -25,13 +25,11 @@ struct AdjustedWeekdaySymbolsTests {
         #expect(veryShortType == .veryShort)
     }
 
-    @Test("AdjustedWeekdaySymbols returns correct symbol arrays")
-    func adjustedWeekdaySymbolsReturnsCorrectArrays() {
-        let adjustedSymbols = AdjustedWeekdaySymbols(calendar: calendar)
-
-        let fullSymbols = adjustedSymbols.getSymbols(for: .full)
-        let shortSymbols = adjustedSymbols.getSymbols(for: .short)
-        let veryShortSymbols = adjustedSymbols.getSymbols(for: .veryShort)
+    @Test("WeekdaySymbolType returns correct symbol arrays")
+    func weekdaySymbolTypeReturnsCorrectArrays() {
+        let fullSymbols = WeekdaySymbolType.full.getSymbols(from: calendar)
+        let shortSymbols = WeekdaySymbolType.short.getSymbols(from: calendar)
+        let veryShortSymbols = WeekdaySymbolType.veryShort.getSymbols(from: calendar)
 
         #expect(fullSymbols.count == 7)
         #expect(shortSymbols.count == 7)
@@ -42,18 +40,15 @@ struct AdjustedWeekdaySymbolsTests {
         #expect(veryShortSymbols.first?.count == 1)
     }
 
-    @Test("AdjustedWeekdaySymbols respects firstWeekday setting")
-    func adjustedWeekdaySymbolsRespectsFirstWeekday() {
+    @Test("WeekdaySymbolType respects firstWeekday setting")
+    func weekdaySymbolTypeRespectsFirstWeekday() {
         var mondayCalendar = Calendar(identifier: .gregorian)
         mondayCalendar.timeZone = TimeZone(identifier: "UTC")!
         mondayCalendar.locale = Locale(identifier: "en_US")
         mondayCalendar.firstWeekday = 2
 
-        let sundaySymbols = AdjustedWeekdaySymbols(calendar: calendar)
-        let mondaySymbols = AdjustedWeekdaySymbols(calendar: mondayCalendar)
-
-        let sundayShortSymbols = sundaySymbols.getSymbols(for: .short)
-        let mondayShortSymbols = mondaySymbols.getSymbols(for: .short)
+        let sundayShortSymbols = WeekdaySymbolType.short.getSymbols(from: calendar)
+        let mondayShortSymbols = WeekdaySymbolType.short.getSymbols(from: mondayCalendar)
 
         #expect(sundayShortSymbols.first == "Sun")
         #expect(mondayShortSymbols.first == "Mon")
@@ -62,13 +57,11 @@ struct AdjustedWeekdaySymbolsTests {
         #expect(mondayShortSymbols.count == 7)
     }
 
-    @Test("AdjustedWeekdaySymbols uses standalone symbols")
-    func adjustedWeekdaySymbolsUsesStandaloneSymbols() {
-        let adjustedSymbols = AdjustedWeekdaySymbols(calendar: calendar)
-
-        let fullSymbols = adjustedSymbols.getSymbols(for: .full)
-        let shortSymbols = adjustedSymbols.getSymbols(for: .short)
-        let veryShortSymbols = adjustedSymbols.getSymbols(for: .veryShort)
+    @Test("WeekdaySymbolType uses standalone symbols")
+    func weekdaySymbolTypeUsesStandaloneSymbols() {
+        let fullSymbols = WeekdaySymbolType.full.getSymbols(from: calendar)
+        let shortSymbols = WeekdaySymbolType.short.getSymbols(from: calendar)
+        let veryShortSymbols = WeekdaySymbolType.veryShort.getSymbols(from: calendar)
 
         let expectedFull = calendar.standaloneWeekdaySymbols
         let expectedShort = calendar.shortStandaloneWeekdaySymbols

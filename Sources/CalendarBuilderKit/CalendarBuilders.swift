@@ -30,8 +30,7 @@ public struct MonthCalendarsBuilder<Content: View>: View {
 
     public var body: some View {
         Group {
-            let adjustedSymbols = AdjustedWeekdaySymbols(calendar: model.calendar)
-            content(model.loadStatus, adjustedSymbols.getSymbols(for: symbolType))
+            content(model.loadStatus, symbolType.getSymbols(from: model.calendar))
         }
         .task(id: model.range) {
             await model.loadMonths()
@@ -72,8 +71,7 @@ public struct WeekCalendarsBuilder<Content: View>: View {
 
     public var body: some View {
         Group {
-            let adjustedSymbols = AdjustedWeekdaySymbols(calendar: model.calendar)
-            content(model.loadStatus, adjustedSymbols.getSymbols(for: symbolType))
+            content(model.loadStatus, symbolType.getSymbols(from: model.calendar))
         }
         .task(id: model.range) {
             await model.loadWeeks()
