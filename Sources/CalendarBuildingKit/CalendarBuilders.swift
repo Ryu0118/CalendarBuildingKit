@@ -2,7 +2,7 @@ import SwiftUI
 
 /// SwiftUI view builder for month-based calendar layouts
 public struct MonthCalendarsBuilder<Content: View>: View {
-    let model: MonthCalendarsModel
+    @State var model: MonthCalendarsModel
     let symbolType: WeekdaySymbolType
     let content: (LoadStatus<MonthContext>, [String]) -> Content
     let onLoaded: (([MonthContext]) -> Void)?
@@ -43,7 +43,7 @@ public struct MonthCalendarsBuilder<Content: View>: View {
 
 /// SwiftUI view builder for week-based calendar layouts
 public struct WeekCalendarsBuilder<Content: View>: View {
-    let model: WeekCalendarsModel
+    @State var model: WeekCalendarsModel
     let symbolType: WeekdaySymbolType
     let content: (LoadStatus<WeekContext>, [String]) -> Content
     let onLoaded: (([WeekContext]) -> Void)?
