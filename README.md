@@ -1,31 +1,20 @@
-# CalendarBuildingKit
+
+# 📅 CalendarBuildingKit
 
 **📅 A Swift library providing minimal components for building calendar views**
 
-CalendarBuildingKit provides essential logic for constructing calendar views. It generates structured calendar data (months, weeks, days), allowing you to focus on designing your calendar UI.
+CalendarBuildingKit provides a lightweight and structured foundation to build custom calendar views. It focuses on generating and managing calendar data such as **months**, **weeks**, and **days**, allowing you to focus entirely on the UI.
 
-## 🚀 Quick Start
-
-### Installation
-
-Add CalendarBuildingKit to your project using Swift Package Manager:
-
-```swift
-dependencies: [
-    .package(url: "https://github.com/yourusername/CalendarBuildingKit", from: "0.1.0")
-]
-```
-
-### Basic Usage
+## 🚀 Basic Usage
 
 > [!NOTE]
 > These are minimal examples. You can style them any way you want - add backgrounds, spacing, animations, and custom layouts.
 
-#### Month Calendar
+### 📆 Month-Based Calendar
 
 ```swift
 MonthCalendarsBuilder(range: start...end) { status, weekdaySymbols in
-    TabView(selection: $selectedMonth) {
+    TabView {
         ForEach(status.data) { month in
             VStack {
                 HStack {
@@ -42,18 +31,16 @@ MonthCalendarsBuilder(range: start...end) { status, weekdaySymbols in
                     }
                 }
             }
-            .tag(month)
         }
     }
-    .tabViewStyle(.page)
 }
-```
+````
 
-#### Week Calendar
+### 📅 Week-Based Calendar
 
 ```swift
 WeekCalendarsBuilder(range: start...end) { status, weekdaySymbols in
-    TabView(selection: $selectedWeek) {
+    TabView {
         ForEach(status.data) { week in
             VStack {
                 HStack {
@@ -68,54 +55,72 @@ WeekCalendarsBuilder(range: start...end) { status, weekdaySymbols in
                     }
                 }
             }
-            .tag(week)
         }
     }
-    .tabViewStyle(.page)
 }
 ```
 
-## 📖 API Reference
+---
 
-### MonthCalendarsBuilder
+## 🧩 Core APIs
 
-Creates month-based calendar layouts with the following parameters:
+### `MonthCalendarsBuilder`
+
+A SwiftUI view builder that renders calendar UIs based on full months.
 
 ```swift
 MonthCalendarsBuilder(
-    range: ClosedRange<Date>,          // Required: Date range to display
-    calendar: Calendar = .current,     // Optional: Calendar configuration
-    symbols: WeekdaySymbolType = .short, // Optional: Weekday symbol style
-    onLoaded: (([MonthContext]) -> Void)? = nil // Optional: Load completion callback
+    range: ClosedRange<Date>,                // The date range to display
+    calendar: Calendar = .current,           // (Optional) Custom calendar configuration
+    symbols: WeekdaySymbolType = .short,     // (Optional) Symbol format
+    onLoaded: (([MonthContext]) -> Void)?    // (Optional) Callback after loading
 ) { loadStatus, weekdaySymbols in
-    // Your calendar UI implementation
+    // Your calendar layout here
 }
 ```
 
-### WeekCalendarsBuilder
+### `WeekCalendarsBuilder`
 
-Creates week-based calendar layouts with the same parameter structure as `MonthCalendarsBuilder`, but returns `WeekContext` objects.
-
-### WeekdaySymbolType
-
-The `symbols` parameter in both builders accepts a `WeekdaySymbolType` enum to control weekday display format:
+Same as above, but for week-based layouts.
 
 ```swift
-MonthCalendarsBuilder(
-    range: dateRange,
-    symbols: .short
-) { status, weekdaySymbols in
-    // weekdaySymbols array contains localized symbols
+WeekCalendarsBuilder(
+    range: ClosedRange<Date>,
+    calendar: Calendar = .current,
+    symbols: WeekdaySymbolType = .short,
+    onLoaded: (([WeekContext]) -> Void)? = nil
+) { loadStatus, weekdaySymbols in
+    // Your week calendar layout here
 }
 ```
 
-**Available options:**
-- `.full` - Full standalone weekday names: "Sunday", "Monday", "Tuesday"...
-- `.short` - Short standalone weekday names: "Sun", "Mon", "Tue"... (default)
-- `.veryShort` - Minimal standalone weekday names: "S", "M", "T"...
+### `WeekdaySymbolType`
 
-The symbols are retrieved from Foundation's `Calendar.standaloneWeekdaySymbols`, automatically reordered based on `firstWeekday` setting, and fully localized according to the calendar's locale.
+Control how weekday headers are displayed.
 
-## 💡 Example Project
+```swift
+enum WeekdaySymbolType {
+    case full        // "Sunday", "Monday", ...
+    case short       // "Sun", "Mon", ...   (default)
+    case veryShort   // "S", "M", ...
+}
+```
 
+Symbols are fully localized and automatically reordered based on the calendar's `firstWeekday`.
+
+---
+
+## ⚙️ CalendarGenerator
+
+`CalendarGenerator` is a standalone utility that produces structured calendar data (`MonthContext`, `WeekContext`, etc.). This is ideal when building calendar UIs in **UIKit** or using the calendar logic outside of SwiftUI.
+
+```swift
+let generator = CalendarGenerator()
+let months = generator.generateMonthContexts(for: startDate...endDate)
+let weeks = generator.generateWeekContexts(for: startDate...endDate)
+let singleMonth = generator.generateMonthContext(for: someDate)
+let singleWeek = generator.generateWeekContext(for: someDate)
+```
+
+## 📁 Example
 See the [Example project](./Example)
