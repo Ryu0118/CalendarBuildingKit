@@ -4,6 +4,7 @@ import SwiftUI
 public struct MonthCalendarsBuilder<Content: View>: View {
     @State var model: MonthCalendarsModel
     let symbolType: WeekdaySymbolType
+    let range: ClosedRange<Date>
     let content: (LoadStatus<MonthContext>, [String]) -> Content
     let onLoaded: (([MonthContext]) -> Void)?
 
@@ -22,7 +23,8 @@ public struct MonthCalendarsBuilder<Content: View>: View {
         @ViewBuilder content: @escaping (LoadStatus<MonthContext>, [String]) -> Content
     ) {
         let generator = CalendarGenerator(calendar: calendar)
-        self._model = State(initialValue: MonthCalendarsModel(range: range, generator: generator))
+        self.model = MonthCalendarsModel(generator: generator)
+        self.range = range
         self.symbolType = symbols
         self.onLoaded = onLoaded
         self.content = content
@@ -32,20 +34,11 @@ public struct MonthCalendarsBuilder<Content: View>: View {
         Group {
             content(model.loadStatus, symbolType.getSymbols(from: model.calendar))
         }
-        .task {
-            await loadData()
-        }
-        .onChange(of: model.range) {
-            Task {
-                await loadData()
+        .task(id: range) {
+            await model.loadMonths(range: range)
+            if case .loaded(let contexts) = model.loadStatus {
+                onLoaded?(contexts)
             }
-        }
-    }
-
-    private func loadData() async {
-        await model.loadMonths()
-        if case .loaded(let contexts) = model.loadStatus {
-            onLoaded?(contexts)
         }
     }
 }
@@ -54,6 +47,7 @@ public struct MonthCalendarsBuilder<Content: View>: View {
 public struct WeekCalendarsBuilder<Content: View>: View {
     @State var model: WeekCalendarsModel
     let symbolType: WeekdaySymbolType
+    let range: ClosedRange<Date>
     let content: (LoadStatus<WeekContext>, [String]) -> Content
     let onLoaded: (([WeekContext]) -> Void)?
 
@@ -72,7 +66,8 @@ public struct WeekCalendarsBuilder<Content: View>: View {
         @ViewBuilder content: @escaping (LoadStatus<WeekContext>, [String]) -> Content
     ) {
         let generator = CalendarGenerator(calendar: calendar)
-        self._model = State(initialValue: WeekCalendarsModel(range: range, generator: generator))
+        self.model = WeekCalendarsModel(generator: generator)
+        self.range = range
         self.symbolType = symbols
         self.onLoaded = onLoaded
         self.content = content
@@ -82,20 +77,11 @@ public struct WeekCalendarsBuilder<Content: View>: View {
         Group {
             content(model.loadStatus, symbolType.getSymbols(from: model.calendar))
         }
-        .task {
-            await loadData()
-        }
-        .onChange(of: model.range) {
-            Task {
-                await loadData()
+        .task(id: range) {
+            await model.loadWeeks(range: range)
+            if case .loaded(let contexts) = model.loadStatus {
+                onLoaded?(contexts)
             }
-        }
-    }
-
-    private func loadData() async {
-        await model.loadWeeks()
-        if case .loaded(let contexts) = model.loadStatus {
-            onLoaded?(contexts)
         }
     }
 }

@@ -3,7 +3,7 @@ import Foundation
 /// Generator for creating calendar contexts from dates
 public struct CalendarGenerator {
     // Calendar instance used for date calculations
-    public let calendar: Calendar
+    public var calendar: Calendar
 
     /// Creates a new calendar generator
     /// - Parameter calendar: Calendar to use for date calculations (defaults to current)
