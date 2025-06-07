@@ -9,7 +9,7 @@ public enum WeekdaySymbolType {
     /// Very short weekday symbols (e.g., "S", "M", ...)
     case veryShort
 
-    func getSymbols(from calendar: Calendar) -> [String] {
+    public func getSymbols(from calendar: Calendar) -> [String] {
         let offset = calendar.firstWeekday - 1
         return switch self {
         case .full:
