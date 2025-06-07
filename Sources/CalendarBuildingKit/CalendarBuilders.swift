@@ -22,7 +22,7 @@ public struct MonthCalendarsBuilder<Content: View>: View {
         @ViewBuilder content: @escaping (LoadStatus<MonthContext>, [String]) -> Content
     ) {
         let generator = CalendarGenerator(calendar: calendar)
-        self.model = MonthCalendarsModel(range: range, generator: generator)
+        self._model = State(initialValue: MonthCalendarsModel(range: range, generator: generator))
         self.symbolType = symbols
         self.onLoaded = onLoaded
         self.content = content
@@ -72,7 +72,7 @@ public struct WeekCalendarsBuilder<Content: View>: View {
         @ViewBuilder content: @escaping (LoadStatus<WeekContext>, [String]) -> Content
     ) {
         let generator = CalendarGenerator(calendar: calendar)
-        self.model = WeekCalendarsModel(range: range, generator: generator)
+        self._model = State(initialValue: WeekCalendarsModel(range: range, generator: generator))
         self.symbolType = symbols
         self.onLoaded = onLoaded
         self.content = content
