@@ -32,11 +32,20 @@ public struct MonthCalendarsBuilder<Content: View>: View {
         Group {
             content(model.loadStatus, symbolType.getSymbols(from: model.calendar))
         }
-        .task(id: model.range) {
-            await model.loadMonths()
-            if case .loaded(let contexts) = model.loadStatus {
-                onLoaded?(contexts)
+        .task {
+            await loadData()
+        }
+        .onChange(of: model.range) {
+            Task {
+                await loadData()
             }
+        }
+    }
+
+    private func loadData() async {
+        await model.loadMonths()
+        if case .loaded(let contexts) = model.loadStatus {
+            onLoaded?(contexts)
         }
     }
 }
@@ -73,11 +82,20 @@ public struct WeekCalendarsBuilder<Content: View>: View {
         Group {
             content(model.loadStatus, symbolType.getSymbols(from: model.calendar))
         }
-        .task(id: model.range) {
-            await model.loadWeeks()
-            if case .loaded(let contexts) = model.loadStatus {
-                onLoaded?(contexts)
+        .task {
+            await loadData()
+        }
+        .onChange(of: model.range) {
+            Task {
+                await loadData()
             }
+        }
+    }
+
+    private func loadData() async {
+        await model.loadWeeks()
+        if case .loaded(let contexts) = model.loadStatus {
+            onLoaded?(contexts)
         }
     }
 }
